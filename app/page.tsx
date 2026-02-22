@@ -15,7 +15,6 @@ export default function Home() {
 
   const [showTx, setShowTx] = useState(false);
 
-  const address = "GDRXE2BQUC3AZK4ILC2SIYVA3R5Z4B6CFOTZPND6PN5AWO3YQWF5CH3F";
 
  const { addToast } = useToast();
 
@@ -52,7 +51,6 @@ export default function Home() {
       <TransactionHistoryModal
         open={showTx}
         onClose={() => setShowTx(false)}
-        address={address}
       />
 
       {/* Platform Stats */}
