@@ -13,7 +13,7 @@ export interface AnalyticsEvent {
  * @param event - Event name
  * @param properties - Optional event properties
  */
-export function trackEvent(event: string, properties?: Record<string, unknown>): void {
+export function trackEvent(event?: string, properties?: Record<string, unknown>): void {
   if (typeof window === 'undefined') {
     return;
   }
@@ -29,7 +29,8 @@ export function trackEvent(event: string, properties?: Record<string, unknown>):
 
     // Log to console for development
     if (process.env.NODE_ENV === 'development') {
-      console.info('[Analytics]', event, properties);
+      // eslint-disable-next-line no-console
+      console.debug('[Analytics]', event, properties);
     }
 
     // Example: Send to analytics service

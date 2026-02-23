@@ -24,6 +24,7 @@ interface LeafletMapInstance {
 interface LeafletLayer {
   addTo: (_map: LeafletMapInstance) => LeafletLayer;
   remove?: () => void;
+  bindPopup?: (content: string) => LeafletLayer;
 }
 
 // eslint-disable-next-line @typescript-eslint/no-empty-object-type
@@ -205,7 +206,7 @@ export function ProjectLocationMap({
         }
 
         const marker = L.marker([lat, lng]).addTo(map);
-        marker.bindPopup(
+        marker.bindPopup?.(
           `<strong>${escapeHtml(projectName)}</strong><br />${escapeHtml(locationLabel)}`
         );
 

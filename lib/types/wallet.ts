@@ -27,6 +27,5 @@ export interface WalletContextValue {
 }
 
 export interface WalletConnectionProps {
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   onConnectionChange?: (connection: WalletConnection | null) => void;
 }
