@@ -1,6 +1,6 @@
-export type WalletType = "freighter" | "albedo" | "custodial";
+export type WalletType = 'freighter' | 'albedo' | 'custodial';
 
-export type NetworkType = "testnet" | "mainnet";
+export type NetworkType = 'testnet' | 'mainnet';
 
 export interface WalletBalance {
   xlm: string;
