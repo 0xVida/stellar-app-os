@@ -16,6 +16,11 @@ import './globals.css';
 >>>>>>> main
 
 
+
+import { ToastProvider } from "@/components/ui/toast/toast-provider";
+
+
+
 const inter = Inter({
   variable: '--font-inter',
   subsets: ['latin'],
@@ -68,11 +73,13 @@ export default function RootLayout({
         <meta name="mobile-web-app-capable" content="yes" />
       </head>
       <body className={`${inter.variable} font-sans antialiased`}>
+       <ToastProvider>
         <WalletProviderWrapper>
           <Header />
           {children}
           <Footer />
         </WalletProviderWrapper>
+          </ToastProvider>
       </body>
     </html>
   );
