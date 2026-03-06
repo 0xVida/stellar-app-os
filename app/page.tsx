@@ -6,8 +6,8 @@ import { Button } from '@/components/atoms/Button';
 import { Text } from '@/components/atoms/Text';
 import { Badge } from '@/components/atoms/Badge';
 import { Counter } from '@/components/atoms/Counter';
-import { ImageGallery } from '@/src/components/ImageGallery';
-import { type GalleryImage } from '@/src/types/gallery';
+import { OnboardingTour } from '@/components/organisms/OnboardingTour/OnboardingTour';
+import SocialShareButtons from '@/components/SocialShareButtons';
 import {
   Card,
   CardHeader,
@@ -105,7 +105,7 @@ export default function Home(): JSX.Element {
             size="lg"
             className="w-full"
           >
-            {t('home.connectWallet')}
+            Connect Wallet
           </Button>
           <Button asChild variant="outline" size="lg" className="w-full">
             <Link href="/blog">{t('home.readBlog')}</Link>
@@ -125,15 +125,31 @@ export default function Home(): JSX.Element {
           <Button data-tour-id="purchase-credits-button" asChild variant="outline" size="lg" className="w-full">
             <Link href="/credits/purchase">Purchase Carbon Credits</Link>
           <Button
+            data-tour-id="purchase-credits-button"
             asChild
-            variant="default"
+            variant="outline"
             size="lg"
-            className="w-full bg-green-500 hover:bg-green-600"
+            className="w-full"
           >
-            <Link href="/donate">{t('home.makeDonation')}</Link>
+            <Link href="/credits/purchase">Purchase Carbon Credits</Link>
           </Button>
         </CardContent>
       </Card>
+
+      <Card className="w-full max-w-md">
+        <CardHeader>
+          <CardTitle>Share FarmCredit</CardTitle>
+          <CardDescription>Help spread the word about sustainable agriculture.</CardDescription>
+        </CardHeader>
+        <CardContent>
+          <SocialShareButtons
+            title="Check out FarmCredit!"
+            description="A decentralized agricultural credit platform built on Stellar"
+            impact="Supporting sustainable farming and equal access to credit"
+          />
+        </CardContent>
+      </Card>
+
       <OnboardingTour />
     </div>
   );

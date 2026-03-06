@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { Button } from '@/components/atoms/Button';
@@ -13,20 +13,6 @@ import {
   CardTitle,
 } from '@/components/molecules/Card';
 import { hasCompletedOnboardingTour, requestOnboardingTourRestart } from '@/lib/onboardingTour';
-import { DeleteAccountSection } from '@/components/organisms/settings/DeleteAccountSection';
-import { NotificationSection } from '@/components/organisms/settings/NotificationSection';
-import { PreferencesSection } from '@/components/organisms/settings/PreferencesSection';
-import { ProfileSection } from '@/components/organisms/settings/ProfileSection';
-import { User, Bell, Sliders, Trash2 } from 'lucide-react';
-import { cn } from '@/lib/utils';
-import { NavItem, SECTION_TITLES, TabId } from '@/types/settings';
-
-const NAV_ITEMS: NavItem[] = [
-  { id: 'profile', label: 'My Profile', icon: <User className="h-4 w-4" /> },
-  { id: 'notifications', label: 'Notifications', icon: <Bell className="h-4 w-4" /> },
-  { id: 'preferences', label: 'Preferences', icon: <Sliders className="h-4 w-4" /> },
-  { id: 'danger', label: 'Delete Account', icon: <Trash2 className="h-4 w-4" /> },
-];
 
 export default function SettingsPage(): React.ReactNode {
   const router = useRouter();

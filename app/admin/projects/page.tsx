@@ -1,8 +1,15 @@
-'use client';
-
+import Link from 'next/link';
 import type { ReactNode } from 'react';
+import { Badge } from '@/components/atoms/Badge';
+import { Button } from '@/components/atoms/Button';
 import { Text } from '@/components/atoms/Text';
-import { AdminProjectTable } from '@/components/organisms/AdminProjectTable/AdminProjectTable';
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from '@/components/molecules/Card';
 import { mockAdminProjectDetails } from '@/lib/api/mock/adminProjectDetails';
 
 export default function AdminProjectsPage(): ReactNode {
@@ -18,19 +25,32 @@ export default function AdminProjectsPage(): ReactNode {
         </Text>
       </div>
 
-      <AdminProjectTable
-        projects={mockAdminProjectDetails}
-        onProjectUpdate={(payload) => {
-        onProjectUpdate={async (payload) => {
-          console.info('Project update:', payload);
-          // TODO: Implement API call to update projects
-          return Promise.resolve();
-        }}
-        onNavigateDetail={(projectId) => {
-          console.info('Navigate to detail view:', projectId);
-          // TODO: Implement navigation to detail page
-        }}
-      />
+      <div className="grid gap-4">
+        {mockAdminProjectDetails.map((project) => (
+          <Card key={project.id}>
+            <CardHeader className="gap-3 sm:flex-row sm:items-start sm:justify-between">
+              <div>
+                <CardTitle className="text-xl">{project.name}</CardTitle>
+                <CardDescription>
+                  {project.id} • {project.country} • {project.type}
+                </CardDescription>
+              </div>
+              <div className="flex flex-wrap gap-2">
+                <Badge variant={project.verificationEnabled ? 'success' : 'secondary'}>
+                  {project.verificationEnabled ? 'Verified' : 'Verification Off'}
+                </Badge>
+                <Badge variant="outline">{project.lifecycleStatus}</Badge>
+              </div>
+            </CardHeader>
+            <CardContent className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+              <p className="text-sm text-muted-foreground">{project.description}</p>
+              <Button asChild stellar="primary" className="shrink-0">
+                <Link href={`/admin/projects/${project.id}`}>Open Detail View</Link>
+              </Button>
+            </CardContent>
+          </Card>
+        ))}
+      </div>
     </div>
   );
 }

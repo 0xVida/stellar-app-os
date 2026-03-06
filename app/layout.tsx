@@ -2,15 +2,7 @@ import type { Metadata, Viewport } from 'next';
 import { Inter } from 'next/font/google';
 import { Header } from '@/components/organisms/Header/Header';
 import { Footer } from '@/components/organisms/Footer/Footer';
-import './globals.css';
-import { WalletProviderWrapper } from '@/components/providers/WalletProviderWrapper';
-// import type { Metadata, Viewport } from 'next';
-// import { Inter } from 'next/font/google';
-// import './globals.css';
-import { ToastProvider } from '@/components/ui/toast/toast-provider';
-import { I18nProvider } from '@/components/providers/I18nProvider';
-import { Toaster } from 'sonner';
-import { FavoritesProvider } from '@/contexts/FavouritesContext';
+import { ToastProvider } from '@/components/providers/ToastProvider';
 
 const inter = Inter({
   variable: '--font-inter',
@@ -64,18 +56,8 @@ export default function RootLayout({
         <meta name="mobile-web-app-capable" content="yes" />
       </head>
       <body className={`${inter.variable} font-sans antialiased`}>
-        <I18nProvider>
-          <ToastProvider>
-            <WalletProviderWrapper>
-              <FavoritesProvider>
-                <Header />
-                {children}
-                <Footer />
-              </FavoritesProvider>
-            </WalletProviderWrapper>
-          </ToastProvider>
-        </I18nProvider>
-        <Toaster position="top-right" toastOptions={{ duration: 2000 }} />
+        <ToastProvider>{children}</ToastProvider>
+        <Footer />
       </body>
     </html>
   );
