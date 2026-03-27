@@ -3,6 +3,7 @@ import { Inter } from 'next/font/google';
 import { Header } from '@/components/organisms/Header/Header';
 import { Footer } from '@/components/organisms/Footer/Footer';
 import { ToastProvider } from '@/components/providers/ToastProvider';
+import { WalletProviderWrapper } from '@/components/providers/WalletProviderWrapper';
 import './globals.css';
 
 const inter = Inter({
@@ -57,13 +58,15 @@ export default function RootLayout({
         <meta name="mobile-web-app-capable" content="yes" />
       </head>
       <body className={`${inter.variable} font-sans antialiased`}>
-        <ToastProvider>
-          <Header />
-          <main id="main-content" tabIndex={-1}>
-            {children}
-          </main>
-          <Footer />
-        </ToastProvider>
+        <WalletProviderWrapper>
+          <ToastProvider>
+            <Header />
+            <main id="main-content" tabIndex={-1}>
+              {children}
+            </main>
+            <Footer />
+          </ToastProvider>
+        </WalletProviderWrapper>
       </body>
     </html>
   );
