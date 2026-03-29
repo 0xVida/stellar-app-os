@@ -26,6 +26,17 @@ export function useCreditPortfolio(publicKey: string | null) {
       return;
     }
 
+    if (typeof window !== 'undefined') {
+      const refreshFlag = window.localStorage.getItem('portfolio_refresh');
+      if (refreshFlag) {
+        const refreshTimestamp = Number.parseInt(refreshFlag, 10);
+        if (!Number.isNaN(refreshTimestamp) && refreshTimestamp > lastFetchRef.current) {
+          lastFetchRef.current = 0;
+        }
+        window.localStorage.removeItem('portfolio_refresh');
+      }
+    }
+
     // Skip if cached data is fresh
     if (Date.now() - lastFetchRef.current < CACHE_TTL) {
       return;

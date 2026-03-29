@@ -1,7 +1,7 @@
 'use client';
 
 import { useCallback, useEffect, useState } from 'react';
-import { useRouter } from 'next/navigation';
+import { useRouter, useSearchParams } from 'next/navigation';
 import { TrendingUp, RefreshCw, AlertCircle, Wallet } from 'lucide-react';
 import { Button } from '@/components/atoms/Button';
 import { Text } from '@/components/atoms/Text';
@@ -45,6 +45,15 @@ function CreditPortfolioContent() {
     wallet?.publicKey || null
   );
   const router = useRouter();
+  const searchParams = useSearchParams();
+
+  useEffect(() => {
+    const refreshParam = searchParams.get('refresh');
+    if (refreshParam === '1') {
+      refreshPortfolio();
+      router.replace('/dashboard/credits');
+    }
+  }, [searchParams, refreshPortfolio, router]);
 
   const handleTrade = useCallback(
     (credit: CreditHolding) => {
@@ -55,7 +64,7 @@ function CreditPortfolioContent() {
 
   const handleRetire = useCallback(
     (credit: CreditHolding) => {
-      router.push(`/dashboard/retire?projectId=${credit.projectId}&quantity=${credit.quantity}`);
+      router.push(`/credits/retire?projectId=${credit.projectId}&quantity=${credit.quantity}`);
     },
     [router]
   );
