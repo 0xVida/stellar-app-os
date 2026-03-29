@@ -3,6 +3,7 @@ import { Inter } from 'next/font/google';
 import Script from 'next/script';
 import { Header } from '@/components/organisms/Header/Header';
 import { Footer } from '@/components/organisms/Footer/Footer';
+import { CookieBanner } from '@/components/CookieBanner';
 import { ToastProvider } from '@/components/providers/ToastProvider';
 import { WalletProviderWrapper } from '@/components/providers/WalletProviderWrapper';
 import './globals.css';
@@ -77,6 +78,7 @@ export default function RootLayout({
         </Script>
         <WalletProviderWrapper>
           <ToastProvider>
+            <CookieBanner />
             <Header />
             {children}
             <Footer />
